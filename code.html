@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#38ff14",
+                        "background-light": "#f6f8f5",
+                        "background-dark": "#000000",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0rem", "lg": "0rem", "xl": "0rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>.parallax-bg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform;
+    }
+.grain-overlay {
+    position: relative
+    }
+.grain-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCItB_ijISGUu6M1dSts5A7K6NSIt0AXrBt0VGzAs6D79O6z9xiQpyTXx6GYcfhREVfS3G7HHkR7k33nfTbUxzyngYwLBk-mluWB2CV7wm22BcXEX-rZdXQc048cwwtD8oej8yLfp3aJzjIuIkZhuvTE_lXjlUz1bU53kRABpe6KHRH22V4R8K0Vgz2O1gSRj0lVbSNUPuz3ULMquWWUZUlxGmrGnhf6cLGhAeQik4wND2QeCYocXt_DGgYUC0SB4_1tVQAnm4hpnYA);
+    opacity: 0.05
+    }
+.brutal-border {
+    border: 2px solid #38ff14
+    }
+input:focus {
+    outline: none;
+    border-color: #38ff14 !important;
+    ring: 0 !important
+    }
+html.lenis, html.lenis body {
+    height: auto;
+    }
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+    }
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+    }
+.lenis.lenis-stopped {
+    overflow: hidden;
+    }
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+    }
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    background: #38ff14;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-difference: exclusion;
+    transition: transform 0.1s ease-out, width 0.3s ease, height 0.3s ease;
+    display: none;
+    }
+@media (pointer: fine) {
+    .custom-cursor {
+        display: block;
+    }
+    body {
+        cursor: none;
+    }
+    a, button, input {
+        cursor: none;
+    }
+}
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: none;
+    }
+</style>
+</head>
+<body class="bg-background-dark text-slate-100 font-display selection:bg-primary selection:text-black">
+<div class="custom-cursor" id="cursor"></div>
+<header class="fixed top-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center border-b border-white/10 bg-black/80 backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">skull</span>
+<span class="text-2xl font-black tracking-tighter uppercase">buenveneno.mx</span>
+</div>
+<nav class="hidden md:flex gap-12 text-sm font-bold tracking-widest uppercase">
+<a class="hover:text-primary transition-colors" href="#specialties">Estrategia</a>
+<a class="hover:text-primary transition-colors" href="#portfolio">Portafolio</a>
+<a class="hover:text-primary transition-colors text-primary italic underline decoration-2 underline-offset-4" href="#contact">Contacto</a>
+</nav>
+<button class="bg-primary text-black px-6 py-2 font-black uppercase text-sm hover:bg-white transition-all">
+            Start Project
+        </button>
+</header>
+<main class="grain-overlay">
+<section class="relative h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
+<div class="absolute inset-0 z-0 opacity-40 grayscale contrast-150">
+<img alt="High grain black and white abstract architecture" class="w-full h-full object-cover" data-alt="High grain black and white abstract architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbLXZgteN5YwQ9cQk7oTkbcyhcus-LPhp3VrJ5d9wDnEPMYBwOVn4dGKJgQ2FP08cS0EtqaYl2gPGtDOQg1vx3O4cehAuC1M1YUC2SC1cOVSJKgatn9I8s4JGFvoQiDgx7hJboK4g_F2dRb0hZQN-923funqIShPA9FWMR4Zr3ejk3gQgGomG-iZmHhPYpUDeLt04gl654wM98Z5UuX-iAgH-vymthQehlcAdYKU1iKxmEANCFlf853151rm6IOT3GagfI3u4RZQvc"/>
+</div>
+<div class="z-10 max-w-6xl">
+<h1 class="text-6xl md:text-[10rem] font-black leading-[0.85] tracking-tighter mb-8 uppercase italic">
+                    Diseño <br/>que <span class="text-primary not-italic">mata</span>
+</h1>
+<p class="text-xl md:text-3xl font-light tracking-tight max-w-2xl mx-auto mb-10 text-slate-300">
+                    Agencia de landing pages premium para marcas que no temen destacar del ruido blanco.
+                </p>
+<div class="flex flex-col md:flex-row gap-4 justify-center">
+<button class="group relative px-12 py-6 bg-primary text-black font-black text-2xl uppercase overflow-hidden hover:bg-white transition-colors">
+<span class="relative z-10">Inject Results</span>
+</button>
+</div>
+</div>
+<div class="absolute bottom-10 left-12 hidden md:block">
+<p class="text-xs tracking-[0.5em] uppercase vertical-text origin-left -rotate-90 text-primary">Scroll for Venom</p>
+</div>
+</section>
+<section class="bg-black" id="specialties">
+<div class="relative h-[80vh] flex items-center justify-center overflow-hidden border-y border-white/10 group">
+<div class="absolute inset-0 parallax-bg grayscale opacity-30 group-hover:opacity-50 transition-opacity" data-alt="Abstract futuristic neon geometric shapes" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBKARX--zEF2eKf-4tQzYyvapYlWSjXiqvANtT3vgDSuNWbfeAVpCowqS92zT7V801A4imdWyepqXqz4289P6iDTqx6SQOZSyysyna0OLILqAbZRI5p-SyxS15AZMjlb_wzGZIwiTVb_xYMSa-v6ucy19_aEBYuWEdvVVvqomVXWVZ0McTueSEb6R9LarNGrnWY14huH5DKWVHQujPxFCBeexe-GRnhGf5FSMpAx5iMZoaGx0LMQ76L6RG_0rp-x2y3Ez6BvaiiCnoi');"></div>
+<h2 class="relative z-10 text-[12vw] font-black tracking-tighter uppercase text-white hover:text-primary transition-colors cursor-default">Estrategia</h2>
+</div>
+<div class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-white/10 group">
+<div class="absolute inset-0 parallax-bg grayscale opacity-30 group-hover:opacity-50 transition-opacity" data-alt="Abstract dark liquid textures in black and white" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFVS54sAfwsPgUaxUJI5uX_VkckgrL4Q8XPkcT-aBKktwK3LT4fsikRVpUto6FhSVziKOGYdUj1FveSdPgkQEPqEI4K-PswNirT5wXsNDWdOx9BQIXinD8MTlEW_Zxrx2LTzAAX10Yd6KwDCNaXorzpY-EgEHAyA8HaU_VRxCb1x-itJUHRLzl4OX_D6HFvzPPf0imgst_cfSIVYkHm8fdiC1fdZry5MHXzwoHH3WPZnM8IufPs03Cz9SRcJLwZbEvxNZ4yi99tW7o');"></div>
+<h2 class="relative z-10 text-[12vw] font-black tracking-tighter uppercase text-white hover:text-primary transition-colors cursor-default text-right">Conversión</h2>
+</div>
+<div class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b border-white/10 group">
+<div class="absolute inset-0 parallax-bg grayscale opacity-30 group-hover:opacity-50 transition-opacity" data-alt="Sharp metallic textures and shadows" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTN4FD7yxsSKEIvISOlZJhwUK1pFME5zTcEnYNivPnsLPFbDL2_37G6FoaMcnGMW0MwcYOyeR0bT66IKd5g-lcOG6qDbH9SMtpixJrbHHwUHEmKVe0yr0d53UYOV77YB5UqGvHsuVENK42_q-rzgb8y46I7MD41VNzi0dCJEoZusorhFHeJey6r83gzy0qluo3ImDhJrnEAzIS7FGM46-V5_jdca1KkEAwSph4apiJuV5nfrlsZbC1jLZTlX1aVJjNRK78rA0HVDvq');"></div>
+<h2 class="relative z-10 text-[12vw] font-black tracking-tighter uppercase text-white hover:text-primary transition-colors cursor-default">Estética</h2>
+</div>
+</section>
+<section class="py-32 px-6 md:px-12 bg-background-dark" id="portfolio">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8 reveal">
+<h2 class="text-7xl font-black uppercase tracking-tighter leading-none">Veneno <br/><span class="text-primary">Reciente</span></h2>
+<p class="max-w-xs text-slate-400 text-lg">Proyectos seleccionados donde la elegancia y la agresión visual se encuentran.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start reveal">
+<div class="md:col-span-8 group cursor-pointer">
+<div class="overflow-hidden mb-6 brutal-border">
+<img alt="Luxury tech landing page showcase" class="w-full aspect-[16/9] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Minimalist dark web design interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Gx5e4i8kgpk2i2VfMLY0dYhq3VsKrwbCpGBPa44bS-5A1nAiPv8PBmP6ddSTYGq6pMdoa3nD6jtmH9Wc_8XLFYhjJ5hhsLUh5w6Fbmk4wy5fa0EAypXz5YsFjVx-j-UQla05dVfWh2ApaMJZwd4uCjJeOC7Agv6wpEg50V-XZ56zuS9TPlsUgPqbmPMTlcStfr5biVHCMAViOPzulCDYqHBzQ4bl8t6ANofXH1c7W3XnL1YZs3fg2LP_z-fUkXKw_FFZRwy2jA-C"/>
+</div>
+<h3 class="text-3xl font-black uppercase">Project: Zenith</h3>
+<p class="text-primary font-bold uppercase tracking-widest text-sm mt-2">Fintech Branding / UI Design</p>
+</div>
+<div class="md:col-span-4 mt-20 group cursor-pointer">
+<div class="overflow-hidden mb-6 brutal-border">
+<img alt="Fashion editorial web project" class="w-full aspect-[4/5] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Modern fashion photography on website mockup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj9AJLsnu8Qj-fFXNphs_gkJi9nw101focAvheFNzbrB4wDylB9XA5UfE5OoH-L_HyEbjno2qCtnC-GQ0ZihIlehOB1rQSctgQDawG03na8IVQoZQpwjPEmqaYpPYofX8_uxuKMARB-C5T7cbrnGDoJFyWx1EB8fwoFiPcD50vO3fYZYMOOOzhq9hp1zJ7eDbVdeBwmAh2aqGXvwJ79dsI8wVGnbNBIUB3HnhUDsc6bCmwUG_QKFJkQGy-f28PSjBDSdLacbQ8cjDJ"/>
+</div>
+<h3 class="text-3xl font-black uppercase">Project: Raw</h3>
+<p class="text-primary font-bold uppercase tracking-widest text-sm mt-2">E-commerce / Brutalist Layout</p>
+</div>
+<div class="md:col-span-5 group cursor-pointer">
+<div class="overflow-hidden mb-6 brutal-border">
+<img alt="Digital product design mockup" class="w-full aspect-square object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Abstract digital screen with bright accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH6FH1k9bHiSJPhjFNi0szVOwlLPbnMjEP1JZyskgzSkii9yvJe-MLCx0ailJpcCtEB-BlQBX5aAXtTFxmihy6_X2Q-67nVlysUWu4lRpLHaFHK1MGsYDpx6DTAXbxvzX9kAO0_HigFc-ajGxtRVG7uxyvIhyOEwoBWSdVzVczfaiLktewV8YPr2eSpDMMIzCtSl_5vQhHnKdw9OtyBbzs9ZSIJzR_ycjnf5H5d7TreM90d4TVLKsBxHIKhvDSCee6SQj9ByCsLaUs"/>
+</div>
+<h3 class="text-3xl font-black uppercase">Project: Pulse</h3>
+<p class="text-primary font-bold uppercase tracking-widest text-sm mt-2">SaaS / Conversion Engine</p>
+</div>
+<div class="md:col-span-7 mt-32 group cursor-pointer">
+<div class="overflow-hidden mb-6 brutal-border">
+<img alt="Agency website hero section" class="w-full aspect-[21/9] object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Bold typography on dark website layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxfD6hS7t1Fm1uU3hd54xtLeYfsL4aV7US4q066tUsm536NPlpStbduOL2WNhsJssAlZbUTuPmVCQAbzdE1-nx5j-Vj2Ob6jHvirPlR8nxcTc8Kq_XrN7QPXHd3Hse9KP0IN3JxmEv8xTS4BIHOAZ1pnAcdsfg0xqp130VyYYLUz4LHlaKB28pJYmHCVqJjaicpAk-CHXcvWwn_XzWP5o4Wlb-Tqj8PgUJ49STTajtbOo1pMkceOgukYndwzfrKokc0f92X1pIdS2M"/>
+</div>
+<h3 class="text-3xl font-black uppercase">Project: Obsidian</h3>
+<p class="text-primary font-bold uppercase tracking-widest text-sm mt-2">Identity / High-Impact Web</p>
+</div>
+</div>
+</section>
+<section class="py-40 px-6 md:px-12 bg-primary text-black" id="contact">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
+<div class="reveal">
+<h2 class="text-7xl md:text-[8rem] font-black leading-[0.85] tracking-tighter uppercase mb-12 italic">Let's <br/>Talk <br/>Venom</h2>
+<div class="space-y-6">
+<p class="text-2xl font-bold uppercase">hello@buenveneno.mx</p>
+<p class="text-2xl font-bold uppercase">Mexico City, MX</p>
+<div class="flex gap-6 pt-10">
+<span class="material-symbols-outlined text-4xl">share</span>
+<span class="material-symbols-outlined text-4xl">alternate_email</span>
+<span class="material-symbols-outlined text-4xl">language</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-12">
+<div class="group border-b-4 border-black pb-4">
+<label class="block text-sm font-black uppercase mb-2">Who are you?</label>
+<input class="w-full bg-transparent border-none text-4xl md:text-6xl font-black placeholder:text-black/30 p-0" placeholder="NAME / BRAND" type="text"/>
+</div>
+<div class="group border-b-4 border-black pb-4">
+<label class="block text-sm font-black uppercase mb-2">Where to reply?</label>
+<input class="w-full bg-transparent border-none text-4xl md:text-6xl font-black placeholder:text-black/30 p-0" placeholder="EMAIL ADDRESS" type="email"/>
+</div>
+<div class="group border-b-4 border-black pb-4">
+<label class="block text-sm font-black uppercase mb-2">The Mission?</label>
+<input class="w-full bg-transparent border-none text-4xl md:text-6xl font-black placeholder:text-black/30 p-0" placeholder="PROJECT DETAILS" type="text"/>
+</div>
+<button class="mt-8 bg-black text-primary px-12 py-8 text-3xl font-black uppercase hover:bg-white hover:text-black transition-all group relative overflow-hidden">
+<span class="relative z-10">Inject Results</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-black py-12 px-6 border-t border-white/10 text-slate-500">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">skull</span>
+<span class="text-lg font-black tracking-tighter uppercase text-white">buenveneno.mx</span>
+</div>
+<p class="text-sm font-bold uppercase tracking-widest">© 2024 BuenVeneno Agency. All Rights Reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-primary transition-colors uppercase text-xs font-bold tracking-widest" href="#">Instagram</a>
+<a class="hover:text-primary transition-colors uppercase text-xs font-bold tracking-widest" href="#">Twitter</a>
+<a class="hover:text-primary transition-colors uppercase text-xs font-bold tracking-widest" href="#">Behance</a>
+</div>
+</div>
+</footer>
+<script>
+    // Register GSAP plugins
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initialize Lenis
+    const lenis = new Lenis({
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Sync ScrollTrigger with Lenis
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    // Custom Cursor
+    const cursor = document.getElementById('cursor');
+    const moveCursor = (e) => {
+        gsap.to(cursor, {
+            x: e.clientX - 10,
+            y: e.clientY - 10,
+            duration: 0.2,
+            ease: "power2.out"
+        });
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+
+    document.querySelectorAll('a, button, input, .cursor-pointer').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            gsap.to(cursor, {
+                scale: 3,
+                backgroundColor: "#ffffff",
+                mixBlendDifference: "difference",
+                duration: 0.3
+            });
+        });
+        el.addEventListener('mouseleave', () => {
+            gsap.to(cursor, {
+                scale: 1,
+                backgroundColor: "#38ff14",
+                mixBlendDifference: "exclusion",
+                duration: 0.3
+            });
+        });
+    });
+
+    // Reveal Animations
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(el => {
+        gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none none"
+            }
+        });
+    });
+
+    // Parallax Effect for Strategy Sections
+    const parallaxBgs = document.querySelectorAll('.parallax-bg');
+    parallaxBgs.forEach(bg => {
+        const parent = bg.parentElement;
+        gsap.to(bg, {
+            yPercent: 20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: parent,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    });
+
+    // Glitch Hover Effect for Primary Buttons
+    const primaryButtons = document.querySelectorAll('button.bg-primary');
+    primaryButtons.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            gsap.to(btn, {
+                skewX: 2,
+                duration: 0.1,
+                repeat: 3,
+                yoyo: true,
+                ease: "power1.inOut"
+            });
+        });
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                skewX: 0,
+                duration: 0.1
+            });
+        });
+    });
+
+</script>
+</body></html>
